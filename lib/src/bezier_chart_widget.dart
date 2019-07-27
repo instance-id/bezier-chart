@@ -668,8 +668,9 @@ class BezierChartState extends State<BezierChart>
       ),
       alignment: Alignment.center,
       child: Listener(
-        onPointerEnter: widget.config.mouseHover ? null : _onDisplayIndicator,
-        onPointerExit: widget.config.mouseHover ? null : _onHideIndicator(),
+        onPointerEnter: widget.config.mouseHover ? _onDisplayIndicator : null,
+        onPointerMove: widget.config.mouseHover ? _refreshPosition : null,
+        onPointerExit: widget.config.mouseHover ? _onHideIndicator() : null,
         onPointerDown: (_) {
           _touchFingers++;
           if (_touchFingers > 1) {
