@@ -80,6 +80,9 @@ class BezierChartConfig {
   ///Color for the vertical line in each X point, only works when `displayLinesXAxis` is true
   final Color xLinesColor;
 
+  ///'true' if the mouse is to snap to drag as soon as it enters.
+  final bool mouseHover;
+
   BezierChartConfig({
     this.verticalIndicatorStrokeWidth = 2.0,
     this.verticalIndicatorColor = Colors.black,
@@ -87,6 +90,7 @@ class BezierChartConfig {
     this.showDataPoints = true,
     this.displayYAxis = false,
     this.snap = true,
+    this.mouseHover = false,
     this.backgroundColor = Colors.transparent,
     this.xAxisTextStyle,
     this.yAxisTextStyle,

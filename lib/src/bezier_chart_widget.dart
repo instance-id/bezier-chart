@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'bezier_line.dart';
-import 'bezier_chart_config.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'bezier_chart_config.dart';
+import 'bezier_line.dart';
 import 'my_single_child_scroll_view.dart';
 
 typedef FooterValueBuilder = String Function(double value);
@@ -668,6 +668,8 @@ class BezierChartState extends State<BezierChart>
       ),
       alignment: Alignment.center,
       child: Listener(
+        onPointerEnter: widget.config.mouseHover ? null : _onDisplayIndicator,
+        onPointerExit: widget.config.mouseHover ? null : _onHideIndicator(),
         onPointerDown: (_) {
           _touchFingers++;
           if (_touchFingers > 1) {
