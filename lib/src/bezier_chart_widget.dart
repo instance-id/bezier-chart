@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
@@ -657,6 +658,9 @@ class BezierChartState extends State<BezierChart>
 
   @override
   Widget build(BuildContext context) {
+    PointerEnterEvent enter;
+    PointerHoverEvent move;
+    PointerExitEvent exit;
     //using `Listener` to fix the issue with single touch for multitouch gesture like pinch/zoom
     //https://github.com/flutter/flutter/issues/13102
     return Container(
@@ -668,9 +672,17 @@ class BezierChartState extends State<BezierChart>
       ),
       alignment: Alignment.center,
       child: Listener(
-        onPointerEnter: widget.config.mouseHover ? _onDisplayIndicator : null,
-        onPointerMove: widget.config.mouseHover ? _refreshPosition : null,
-        onPointerExit: widget.config.mouseHover ? _onHideIndicator() : null,
+        onPointerHover: (PointerHoverEvent details) => _onDisplayIndicator,
+        onPointerEnter: (PointerEnterEvent details) => _onDisplayIndicator,
+//        onPointerEnter: widget.config.mouseHover
+//            ? (PointerEnterEvent details) => _onDisplayIndicator
+//            : null,
+        onPointerMove: widget.config.mouseHover
+            ? (PointerMoveEvent details) => _refreshPosition
+            : null,
+        onPointerExit: widget.config.mouseHover
+            ? (PointerExitEvent details) => _onHideIndicator()
+            : null,
         onPointerDown: (_) {
           _touchFingers++;
           if (_touchFingers > 1) {

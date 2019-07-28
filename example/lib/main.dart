@@ -204,7 +204,7 @@ Widget sample1(BuildContext context) {
                     end: Alignment.bottomCenter,
                   ),
                   snap: false,
-                  mouseHover: false,
+                  mouseHover: true,
                 ),
               ),
             ),
